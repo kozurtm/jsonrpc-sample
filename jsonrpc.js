@@ -50,7 +50,7 @@ function makeErrorObject(params) {
   
 var NSMethod = {};
 var JSONRPC = function(req, res, ns) {
-  ns = NSMethod[namespace(ns)];
+  var nsm = NSMethod[namespace(ns)];
 
   var rpc = req.body;
   if (typeof rpc.id === 'undefined') {
@@ -69,7 +69,7 @@ var JSONRPC = function(req, res, ns) {
 
   // check method
   var method = rpc.method;
-  if (!(ns && ns.hasOwnProperty(method))) {
+  if (!(nsm && nsm[method])) {
     res.json(makeErrorObject({
       id: rpc.id,
       code: Errno.METHOD_NOT_FOUND
@@ -78,9 +78,7 @@ var JSONRPC = function(req, res, ns) {
   }
 
   // exec method
-  ns[method](rpc, function(err, result) {
-    console.log(err);
-    console.log(result);
+  nsm[method](rpc, function(err, result) {
     if (err) {
       if (typeof err === 'number') {
         err = { code: err };
