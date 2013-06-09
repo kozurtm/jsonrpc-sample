@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>Welcome to {{ title }}</p>
+    <input type="text" id="message">
+    <button type="button" id="send">send</button>
+    <div id="response"></div>
+    <script src="//code.jquery.com/jquery-2.0.1.min.js"></script>
+    <script src="/javascripts/jquery.jsonrpc.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
